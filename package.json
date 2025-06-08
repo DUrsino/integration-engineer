@@ -1,0 +1,24 @@
+{
+  "name": "integration-intelligence",
+  "version": "1.0.8-a",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.3.57",
+    "@langchain/openai": "^0.5.12",
+    "framer-motion": "^12.16.0",
+    "langchain": "^0.3.27",
+    "llamaindex": "^0.11.6",
+    "next": "15.3.3",
+    "openai": "^5.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
+    "react-syntax-highlighter": "^15.6.1"
+  }
+}
