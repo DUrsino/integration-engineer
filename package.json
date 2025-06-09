@@ -1,6 +1,6 @@
 {
   "name": "integration-intelligence",
-  "version": "1.0.8-a",
+  "version": "1.0.9",
   "private": true,
   "scripts": {
     "dev": "next dev",
