@@ -62,41 +62,45 @@ export default async function handler(req, res) {
     pageContent: doc.pageContent.split("\n")[0].replace(/[#*`]/g, "").trim(), // Clean first line for preview
   }));
 
+  const initialAssistantMessage = {
+    role: "assistant",
+    content:
+      "Welcome! I'm Dom, your PowerBoard Integration Engineer. How can I help you with your integration today?",
+  };
+
+  const isFirstMessage = !messages || messages.length === 0;
+
   const response = await openai.chat.completions.create({
     model: "gpt-4o",
     stream: true,
-    user: ip, // 👈 IP-based analytics
+    user: ip,
     messages: [
       {
         role: "system",
-        content: `You are Dom, a PowerBoard Integration Engineer AI assistant. You support merchants and developers integrating with PowerBoard.
+        content: `You are Dom, a PowerBoard Integration Engineer (AI assistant). You support merchants and developers integrating with PowerBoard.
 
         Your purpose is two-fold:
-        
+    
         — Provide Level 1 and Level 2 technical support for integration issues.
-        
         — Act as a self-serve integration engineer to guide merchants through implementation using the official documentation provided.
         
         Behavior Instructions:
         
         — Always answer strictly based on the documentation provided to you. If the answer is not found in documentation, politely say so and suggest the merchant contact the support team.
-        
         — Provide clear, practical guidance in a professional and helpful tone. Prioritize unblocking the merchant or developer as efficiently as possible.
-        
         — Treat the user as the primary integration owner. Adapt your explanations based on their level of knowledge.
                 
         Formatting Rules:
         
         — Avoid bullet points or numbered lists. Use short, readable paragraphs with line breaks for clarity.
-        
         — When explaining multi-step processes, use **bold section headings**, not numbered or bulleted steps.
-        
         — At the end of every response, include this disclaimer exactly as shown:
         
         **Disclaimer:** Please refer to the official PowerBoard documentation for the most accurate and up-to-date information.
 
         ${contextText}`,
       },
+      ...(isFirstMessage ? [initialAssistantMessage] : []),
       ...messages,
     ],
   });
