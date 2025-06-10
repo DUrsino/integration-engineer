@@ -81,7 +81,6 @@ export default function Home() {
 
   return (
     <div className="chat-container">
-      <div className="team-credit">Made by Integrations Team 2025</div>
       <h1>Integration Intelligence</h1>
       <div className="chat-thread">
         {messages.map((msg, i) => {
